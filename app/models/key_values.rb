@@ -11,6 +11,7 @@ module KeyValues
   class Country < KeyValues::Base
     include ActiveHash::Associations
     has_many :people, class_name: 'KeyValues::Person'
+    has_many :cities
 
     self.data = [
       { id: 1, name: "US",     code: "us"     },

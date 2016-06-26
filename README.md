@@ -36,12 +36,17 @@ class City < ActiveRecord::Base
 
 end
 
+# City.create name: 'city1', code: 'city1', address: 'city1_address', country_id: 1
+# City.create name: 'city2', code: 'city2', address: 'city2_address', country_id: 2
+
 module KeyValues
 
   class Base < ActiveHash::Base
   end
 
   class Country < KeyValues::Base
+  	has_many :cities
+
     self.data = [
       { id: 1, name: "US",     code: "us"     },
       { id: 2, name: "Canada", code: "canada" }
@@ -50,7 +55,10 @@ module KeyValues
 
 end
 
-City.first
+City.first.country
+# => #<KeyValues::Country:0x0000000260d2c0 @attributes={:id=>1, :name=>"US", :code=>"us"}>
+
+KeyValues::Country.first.cities
 # #<City:0x00000005950cb8> {
 #            :id => 1,
 #          :name => "city1",
@@ -60,10 +68,8 @@ City.first
 #    :created_at => Sun, 26 Jun 2016 14:38:30 UTC +00:00,
 #    :updated_at => Sun, 26 Jun 2016 14:38:30 UTC +00:00
 # }
-
-City.first.country
-# => #<KeyValues::Country:0x0000000260d2c0 @attributes={:id=>1, :name=>"US", :code=>"us"}>
 ```
+
 ActiveHash belongs to ActiveHash
 ```ruby
 module KeyValues
