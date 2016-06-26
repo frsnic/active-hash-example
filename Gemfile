@@ -28,6 +28,8 @@ gem 'spring',        group: :development
 
 gem 'active_hash'
 
+gem 'awesome_print'
+
 group :development, :test do
   gem 'bundler-audit', require: false
 end
