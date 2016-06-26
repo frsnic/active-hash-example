@@ -30,6 +30,26 @@ KeyValues::Country.find_by_code('us')
 
 ActiveRecord belongs to ActiveHash
 ```ruby
+class City < ActiveRecord::Base
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :country, class_name: "KeyValues::Country"
+
+end
+
+module KeyValues
+
+  class Base < ActiveHash::Base
+  end
+
+  class Country < KeyValues::Base
+    self.data = [
+      { id: 1, name: "US",     code: "us"     },
+      { id: 2, name: "Canada", code: "canada" }
+    ]
+  end
+
+end
+
 City.first
 # #<City:0x00000005950cb8> {
 #            :id => 1,
